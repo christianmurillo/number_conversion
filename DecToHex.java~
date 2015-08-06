@@ -1,0 +1,69 @@
+//Convert Decimal to Hexadecimal
+
+public class DecToHex
+{
+    public static void convert(int d)
+    {
+	switch(d){
+	case 10 :
+	    System.out.print("A ");
+	    break;
+	case 11 :
+	    System.out.print("B ");
+	    break;
+	case 12 :
+	    System.out.print("C ");
+	    break;
+	case 13 :
+	    System.out.print("D ");
+	    break;
+	case 14 :
+	    System.out.print("E ");
+	    break;
+	case 15 :
+	    System.out.print("F ");
+	    break;
+	}
+    }
+    public static void printHexList(Node head)
+    {
+	Node temp = head;
+	while(temp != null){
+	    if(temp.data < 10){
+		System.out.print(temp.data + " ");
+	    }
+	    else{
+		convert(temp.data);
+	    }
+	    temp = temp.next;
+	}
+	System.out.println();
+    }
+    public static void main(String args[])
+    {
+	//number to be converted to binary
+	int n = Integer.parseInt(args[0]);
+	//remainder
+	int r =  n % 16;
+	//create empty list
+	Node head = null;
+	Node p = new Node(r);
+	//insert LSD list
+	p.next = head;
+	head = p;
+	//quotient
+	int q = n / 16;
+	//reassign n for next modulos operation
+	n = q;
+	while(q > 0){
+	    r = n % 16;
+	    p = new Node(r);
+	    //next 2 lines prepend r to list
+	    p.next = head;
+	    head = p;
+	    q = n / 16;
+	    n = q;
+	}
+	printHexList(head);
+    }
+}
